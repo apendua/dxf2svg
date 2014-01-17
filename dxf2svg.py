@@ -10,9 +10,13 @@ SVG_PREAMBLE = \
 '<svg xmlns="http://www.w3.org/2000/svg" ' \
 'version="1.1" viewBox="{0} {1} {2} {3}">\n'
 
-SVG_MOVE_TO = 'M {0:.2f} {1:.2f} '
-SVG_LINE_TO = 'L {0:.2f} {1:.2f} '
-SVG_ARC_TO  = 'A {0:.2f} {1:.2f} {2} {3} {4} {5:.2f} {6:.2f} '
+# SVG_MOVE_TO = 'M {0} {1:.2f} '
+# SVG_LINE_TO = 'L {0} {1:.2f} '
+# SVG_ARC_TO  = 'A {0} {1:.2f} {2} {3} {4} {5:.2f} {6:.2f} '
+
+SVG_MOVE_TO = 'M {0} {1} '
+SVG_LINE_TO = 'L {0} {1} '
+SVG_ARC_TO  = 'A {0} {1} {2} {3} {4} {5} {6} '
 
 SVG_PATH = \
 '<path d="{0}" fill="none" stroke="{1}" stroke-width="{2:.2f}" />\n'
