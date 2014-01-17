@@ -96,8 +96,10 @@ def saveToSVG(svgFile, dxfData):
   svgFile.write(SVG_PREAMBLE.format(
     minX, minY, maxX - minX, maxY - minY))
 
-  for entity in dxfData.entities:   
-    handleEntity(svgFile, entity)
+  for entity in dxfData.entities:
+    layer = dxfData.layers[entity.layer]
+    if layer.on and not layer.frozen:
+      handleEntity(svgFile, entity)
      
   svgFile.write('</svg>\n')
 #end: saveToSVG
@@ -108,10 +110,10 @@ if __name__ == '__main__':
     sys.exit('Usage: {0} file-name'.format(sys.argv[0]))
 
   filename = sys.argv[1]
-  
+
   # grab data from file
   dxfData = dxfgrabber.readfile(filename)
-  
+
   # TODO: alret if the file already exist
   # convert and save to svg
   svgName = '.'.join(filename.split('.')[:-1] + ['svg'])
