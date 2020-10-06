@@ -45,23 +45,23 @@ def handleEntity(svgFile, e):
   # TODO: handle colors and thickness
   # TODO: handle ellipse and spline and some other types
   
-  if isinstance(e, dxfgrabber.entities.Line):      
+  if isinstance(e, dxfgrabber.dxfentities.Line):      
     svgFile.write(SVG_LINE.format(
       e.start[0], e.start[1], e.end[0], e.end[1],
       'black', 1          
     ))
 
-  elif isinstance(e, dxfgrabber.entities.LWPolyline):
+  elif isinstance(e, dxfgrabber.dxfentities.LWPolyline):
     pathString = pathStringFromPoints(e)
     if e.is_closed:
       pathString += 'Z'
     svgFile.write(SVG_PATH.format(pathString, 'black', 1))
     
-  elif isinstance(e, dxfgrabber.entities.Circle):
+  elif isinstance(e, dxfgrabber.dxfentities.Circle):
     svgFile.write(SVG_CIRCLE.format(e.center[0], e.center[1],
       e.radius, 'black', 1))
 
-  elif isinstance(e, dxfgrabber.entities.Arc):
+  elif isinstance(e, dxfgrabber.dxfentities.Arc):
     
     # compute end points of the arc
     x1 = e.center[0] + e.radius * math.cos(math.pi * e.startangle / 180)
@@ -74,7 +74,7 @@ def handleEntity(svgFile, e):
       int(angularDifference(e.startangle, e.endangle) > 180), 1, x2, y2)
 
     svgFile.write(SVG_PATH.format(pathString, 'black', 1))
-  elif isinstance(e, dxfgrabber.entities.Insert):
+  elif isinstance(e, dxfgrabber.dxfentities.Insert):
     # TODO: handle group instances
     pass
 #end: handleEntity
