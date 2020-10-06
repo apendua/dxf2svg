@@ -10,10 +10,6 @@ SVG_PREAMBLE = \
 '<svg xmlns="http://www.w3.org/2000/svg" ' \
 'version="1.1" viewBox="{0} {1} {2} {3}">\n'
 
-# SVG_MOVE_TO = 'M {0} {1:.2f} '
-# SVG_LINE_TO = 'L {0} {1:.2f} '
-# SVG_ARC_TO  = 'A {0} {1:.2f} {2} {3} {4} {5:.2f} {6:.2f} '
-
 SVG_MOVE_TO = 'M {0} {1} '
 SVG_LINE_TO = 'L {0} {1} '
 SVG_ARC_TO  = 'A {0} {1} {2} {3} {4} {5} {6} '
@@ -37,12 +33,6 @@ def angularDifference(startangle, endangle):
     result += 360
   return result
 
-def moveTo(point):
-    return SVG_MOVE_TO.format(point.x,height-point.y)
-
-def lineTo(point):
-    return SVG_LINE_TO.format(point.x,height-point.y)
-
 def pathStringFromPoints(points):  
   pathString = SVG_MOVE_TO.format(*points[0])
   for i in range(1,len(points)):
@@ -52,8 +42,8 @@ def pathStringFromPoints(points):
 # CONVERTING TO SVG
 
 def handleEntity(svgFile, e):
-  # TODO: handle colors and thinckness
-  # TODO: handle elipse and spline and some other types
+  # TODO: handle colors and thickness
+  # TODO: handle ellipse and spline and some other types
   
   if isinstance(e, dxfgrabber.entities.Line):      
     svgFile.write(SVG_LINE.format(
@@ -90,7 +80,6 @@ def handleEntity(svgFile, e):
 #end: handleEntity
 
 def saveToSVG(svgFile, dxfData):
-  
   minX = dxfData.header['$EXTMIN'][0]
   minY = dxfData.header['$EXTMIN'][1]
   maxX = dxfData.header['$EXTMAX'][0]
@@ -118,7 +107,7 @@ if __name__ == '__main__':
   # grab data from file
   dxfData = dxfgrabber.readfile(filename)
 
-  # TODO: alret if the file already exist
+  # TODO: show alert if the file already exist
   # convert and save to svg
   svgName = '.'.join(filename.split('.')[:-1] + ['svg'])
   svgFile = open(svgName, 'w')
